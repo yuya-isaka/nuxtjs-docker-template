@@ -201,6 +201,8 @@ make run-dev
 ↓
 コード編集
 確認
+* http://localhost
+
 ```shell script
 git add .
 git commit -m "comment"
