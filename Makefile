@@ -1,7 +1,8 @@
 up:
 	docker-compose up -d
 start:
-	# @make up
+	@make up
+in:
 	docker-compose exec dev bash
 init:
 	docker-compose up -d --build

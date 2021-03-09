@@ -4,7 +4,7 @@
 * docker-compose
 * makeコマンド
 
-がインストールされている Mac / Linux
+がインストールされてる Mac / Linux
 
 # 使い方
 
@@ -12,7 +12,7 @@
 ### .env
 
 PROJECT_NAMEの値を希望に合わせて編集
-この値は、nuxt.jsプロジェクトのディレクトリ名にもなる
+この値はnuxt.jsプロジェクトのディレクトリ名にもなる
 
 ```.dotenv
 PROJECT_NAME=my_project
@@ -20,9 +20,10 @@ PROJECT_NAME=my_project
 
 ### Makefile
 
-最近のバージョンでは、nuxt.jsプロジェクト作成コマンド実行時、途中でカスタム内容の指定を求められる．
-本一式ではその入力を自動化するために create-nuxt-app実行時のオプション --answers で予めカスタム内容を指定するようにしている．
+カスタム内容の指定(自動化)
+create-nuxt-app実行時のオプション --answers で予めカスタム内容を指定
 --answers のパラメータをJSON形式で指定
+(作りたいアプリに応じて編集)
 
 ```makefile
 ...
@@ -30,14 +31,14 @@ PROJECT_NAME=my_project
 create-nuxt-app:
 	docker-compose exec dev bash -c 'create-nuxt-app $$PROJECT_NAME --answers "{ \
 	\"name\": \"$$PROJECT_NAME\", \
-	\"language\": \"js\", \
+	\"language\": \"ts\", \
 	\"pm\": \"yarn\", \
 	\"ui\": \"vuetify\", \
 	\"features\": [\"axios\"], \
-	\"linter\": [\"eslint\"], \
+	\"linter\": [\"eslint\", \"prettier\"], \
 	\"test\"  : \"jest\", \
 	\"mode\"  : \"universal\", \
-	\"target\"  : \"static\", \
+	\"target\"  : \"server\", \
 	\"devTools\": [\"jsconfig.json\"] }" \
 	'
 ...
@@ -46,22 +47,22 @@ create-nuxt-app:
 
 `Makefile` > `docker-compose` > `bash -c` と入れ子
 
-## コマンドインターフェースを起動する。
+## コマンドインターフェースを起動
 
-## ダウンロードしたフォルダの中に移動する。
+## ダウンロードしたフォルダの中に移動
 
 ```shell script
 git clone からの
 cd docker-nuxtjs
 ```
 
-## 以下のコマンドを実行する。
+## 以下のコマンドを実行する．
 
 ```shell script
 make init
 ```
 
-成功すると、このような表示↓
+成功すると下記の表示↓
 
 ```shell script
 ...
@@ -94,19 +95,20 @@ docker-compose exec -d dev bash -c 'cd $PROJECT_NAME && npm run dev'
 $
 ```
 
-## Nuxt.jsサンプルページが起動しているはずなのでアクセス
+## Nuxt.jsサンプルページが起動しているはず->アクセス
 
 * http://localhost
 
 
 
-本リポジトリ内の`app/`とdockerコンテナ内の`/work/app`が同期（ボリュームマウント）しているので、例えば
+本リポジトリ内の`app/`とdockerコンテナ内の`/work/app`が同期（ボリュームマウント）している．
+-> 例えば
 
 ```
 app/$PROJECT_NAME/pages/index.vue
 ```
 
-を編集すれば、即座に↑のサンプルページに反映されます。
+を編集すれば、即座に↑のサンプルページに反映
 
 ## Dockerコンテナを停止する
 
@@ -126,7 +128,13 @@ make up
 make remake
 ```
 
-※ Nuxt.jsプロジェクトの再作成はしません。Dockerコンテナとしての再ビルド
+## Dockerコンテナに入る
+
+```shell script
+make in
+```
+
+※ Nuxt.jsプロジェクトの再作成はしない．Dockerコンテナとしての再ビルド
 
 ## 本一式を完全廃棄する
 
