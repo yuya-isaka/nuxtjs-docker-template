@@ -134,6 +134,13 @@ make remake
 make in
 ```
 
+## nuxtアプリ起動（現状はnpm使ってる）
+
+```shell script
+make up
+make run-dev
+```
+
 ※ Nuxt.jsプロジェクトの再作成はしない．Dockerコンテナとしての再ビルド
 
 ## 本一式を完全廃棄する
