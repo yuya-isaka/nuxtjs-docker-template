@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  dev:
+    build:
+      context: docker/dev
+      dockerfile: Dockerfile
+      args:
+        project_name: $PROJECT_NAME
+    container_name: dev
+    tty: true
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+    ports:
+      - 80:3000
+    volumes:
+      - ./app:/work/app
