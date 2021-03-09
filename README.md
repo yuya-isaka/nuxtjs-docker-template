@@ -110,6 +110,18 @@ app/$PROJECT_NAME/pages/index.vue
 
 を編集すれば、即座に↑のサンプルページに反映
 
+## Dockerコンテナ確認
+
+```shell script
+make ps
+```
+
+## Dockerコンテナlog確認
+
+```shell script
+make logs
+```
+
 ## Dockerコンテナを停止する
 
 ```shell script
@@ -119,7 +131,13 @@ make stop
 ## Dockerコンテナを起動する
 
 ```shell script
-make up
+make up or make start
+```
+
+## Dockerコンテナを再起動する
+
+```shell script
+make restart
 ```
 
 ## Dockerコンテナを再ビルドする

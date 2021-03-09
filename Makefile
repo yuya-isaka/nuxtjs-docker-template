@@ -47,8 +47,8 @@ logs:
 	docker-compose logs
 logs-watch:
 	docker-compose logs --follow
-sh-dev:
-	docker-compose exec dev bash
+# sh-dev:
+# 	docker-compose exec dev bash
 re-dev:
 	docker-compose build dev
 	docker container stop dev
