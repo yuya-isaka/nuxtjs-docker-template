@@ -169,3 +169,42 @@ make destroy
 
 ※ このコマンドだけではapp/や本一式の内容物をいきなり削除はしない
 そのあと、ご自身の手で本一式のディレクトリを削除
+
+
+## 開発流れ
+
+### 最初
+```shell script
+make up
+------------docker内-------------------
+make in
+yarn install or npm install
+exit
+---------------------------------------
+git pull origin master
+git checkout -b feature/yourname/branchname
+make run-dev
+```
+
+### 2回目
+```shell script
+make up
+------------docker内-------------------
+make in
+yarn install or npm install
+exit
+---------------------------------------
+make run-dev
+```
+
+
+↓
+コード編集
+確認
+```shell script
+git add .
+git commit -m "comment"
+git push origin feature/yourname/branchname
+
+make stop
+```
