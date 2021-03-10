@@ -152,7 +152,7 @@ make remake
 make in
 ```
 
-## nuxtアプリ起動（現状はnpm使ってる）
+## nuxtアプリ起動（最初npmだったけどyarnに変更）
 
 ```shell script
 make up

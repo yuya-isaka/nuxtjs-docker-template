@@ -24,7 +24,7 @@ create-nuxt-app:
 	\"devTools\": [\"jsconfig.json\"] }" \
 	'
 run-dev:
-	docker-compose exec -d dev bash -c 'cd $$PROJECT_NAME && npm run dev'
+	docker-compose exec -d dev bash -c 'cd $$PROJECT_NAME && yarn dev'
 remake:
 	@make destroy
 	docker-compose build --no-cache --force-rm
