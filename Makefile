@@ -13,7 +13,7 @@ init:
 create-nuxt-app:
 	docker-compose exec dev bash -c 'create-nuxt-app $$PROJECT_NAME --answers "{ \
 	\"name\": \"$$PROJECT_NAME\", \
-	\"language\": \"ts\", \
+	\"language\": \"js\", \
 	\"pm\": \"yarn\", \
 	\"ui\": \"vuetify\", \
 	\"features\": [\"axios\"], \
