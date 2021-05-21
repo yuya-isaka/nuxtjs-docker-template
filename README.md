@@ -1,4 +1,4 @@
-# Vue, Docker, 開発環境構築
+# Nuxt, Docker, 開発環境構築
 
 # 必要
 
@@ -8,27 +8,37 @@
 
 # 使い方
 
-## Docker デーモン起動
+## 1. Docker デーモン起動
 
-## クローンしたフォルダの中に移動
+## 2. フォルダ名変更 (docker-nuxtjs -> {project-name})
 
-```shell script
-$ cd docker-nuxtjs
-```
+## 3. フォルダ内に移動
 
-## .git 削除
+## 4. .git 削除
 
 ```shell script
 $ rm -rf .git
 ```
 
-## 以下のコマンド実行
+## 5. .env ファイル，「プロジェクト名」「コンテナ名」を設定
+
+- 名前はキャメルケースでもスネークケースでも OK
+- この名前は nuxt.js プロジェクトのディレクトリ名にもなる
+
+```shell script
+.env
+
+PROJECT_NAME=hoge-project
+CONTAINER_NAME=hoge-container
+```
+
+## 5. Docker イメージ，コンテナ & Nuxt プロジェクト作成
 
 ```shell script
 $ make init
 ```
 
-成功すると下記表示 ↓
+成功すると下記表示 ↓ (成功しなかったら井阪まで)
 
 ```shell script
 ...
@@ -56,57 +66,44 @@ Done in 24.57s.
 	yarn test
 
 docker-compose exec dev bash -c 'sed -i -e "s@export default {@export default {\n  telemetry: false,\n@g" $PROJECT_NAME/nuxt.config.js'
-docker-compose exec -d dev bash -c 'cd $PROJECT_NAME && npm run dev'
-
 $
 ```
 
-## Nuxt.js サンプルページが起動しているはず
+## Github プロジェクト作成 (app/{project-name}と同じ名前にするべし)
 
-- http://localhost
+```
+$ cd app/{project-name}
+$ git init
+$ git add .
+$ git commit -m "first commit"
+$ git remote {作成したリポジトリ名}
+$ git push -u origin master
+```
 
-* 本リポジトリ内の`app/`と docker コンテナ内の`/work/app`が同期（ボリュームマウント）している．
+## プロジェクト完成! やったね!
 
 # 開発流れ
 
 ## make init 後
 
 ```shell script
-Makefileがあるディレクトリに移動
+プロジェクトフォルダに移動（Makefileがあるフォルダ）
 
-make up
-make in
-------------docker内-------------------
-yarn install
-exit
----------------------------------------
-git pull origin master
-git checkout -b feature/{yourname}/{branchname}
-make run
+$ make up
+$ make start
+
+-> app/{project-name}をローカルで開発
+
+* http://localhost で確認
+* 本リポジトリ内の`app/`と docker コンテナ内の`/work/app`が同期（ボリュームマウント）
+
+->開発終わり
+
+$ CTRL^C
+$ make stop
 ```
 
-## 2 回目
-
-```shell script
-make up
-make in
-------------docker内-------------------
-yarn install
-exit
----------------------------------------
-make run
-
-* コード編集
-* 確認: http://localhost
-
-git add .
-git commit -m "comment"
-git push origin feature/yourname/branchname
-
-make stop
-```
-
-# Docker 操作
+# Docker 操作/一覧
 
 ## Nuxt アプリ作成
 
@@ -120,22 +117,16 @@ make init
 make up
 ```
 
-## Nuxt アプリ起動
+## Docker コンテナに入る & yarn install & yarn dev
 
 ```shell script
-make run
+make in
 ```
 
 ## Docker コンテナ停止
 
 ```shell script
 make stop
-```
-
-## Docker コンテナに入る
-
-```shell script
-make in
 ```
 
 ## Docker コンテナ確認
@@ -156,10 +147,19 @@ make logs
 make down
 ```
 
-## Docker コンテナ再起動
+## Docker コンテナ削除＆再起動
 
 ```shell script
 make restart
+```
+
+## 本一式を廃棄(イメージとコンテナ)
+
+```shell script
+make destroy
+
+* このコマンドだけではapp/や本一式の内容物をいきなり削除はしない．
+* 自身の手で本一式のディレクトリを削除．
 ```
 
 ## Docker コンテナをイメージから再ビルド
@@ -168,28 +168,23 @@ make restart
 make remake
 ```
 
-## 本一式を完全廃棄(コンテナとイメージ)
+## Nuxt アプリ起動
 
 ```shell script
-make destroy
-
-* このコマンドだけではapp/や本一式の内容物をいきなり削除はしない．自身の手で本一式のディレクトリを削除．
+make run
 ```
 
-# ファイル説明
+## Docker 内のプロジェクトで"yarn install"
 
-## .env
-
-PROJECT_NAME の値を希望に合わせて編集
-この値は nuxt.js プロジェクトのディレクトリ名にもなる
-
-```.dotenv
-PROJECT_NAME=my_project
+```shell script
+make install
 ```
+
+# ファイル補足説明
 
 ## Makefile
 
-create-nuxt-app 実行時のオプション --answers で予めカスタム内容を指定
+create-nuxt-app 実行時のオプション --answers でカスタム内容を指定
 
 ```makefile
 ...
