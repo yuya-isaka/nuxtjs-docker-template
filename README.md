@@ -12,12 +12,13 @@
 
 ## 2. フォルダ名変更 (必須)
 
-- nuxtjs-docker-template -> {project-name}
+* Dockerから認識される名前
+* nuxtjs-docker-template -> {template-name}
 
 ## 3. フォルダに移動
 
 ```shell script
-$ cd {project-name}
+$ cd {template-name}
 ```
 
 ## 4. .git 削除 (必須)
@@ -28,8 +29,10 @@ $ rm -rf .git
 
 ## 5. .env ファイルに「プロジェクト名」「コンテナ名」を設定
 
-- 名前はキャメルケースでもスネークケースでも OK
-- この名前は nuxt.js プロジェクトのディレクトリ名にもなる
+* 名前はキャメルケースでもスネークケースでも OK
+* プロジェクト名は nuxt.js プロジェクトのディレクトリ名にもなる
+* コンテナ名はDockerで作られるコンテナの名前
+
 
 ```shell script
 .env
