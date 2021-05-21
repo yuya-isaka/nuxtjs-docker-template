@@ -28,6 +28,8 @@ ps:
 	docker-compose ps
 logs:
 	docker-compose logs
+in:
+	docker-compose exec dev bash
 
 down:
 	docker-compose down
