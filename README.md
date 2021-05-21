@@ -129,10 +129,10 @@ make init
 make up
 ```
 
-## Docker コンテナに入る & yarn install & yarn dev
+## Docker コンテナ入る & yarn install & yarn dev
 
 ```shell script
-make in
+make start
 ```
 
 ## Docker コンテナ停止
