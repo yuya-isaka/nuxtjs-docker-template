@@ -1,10 +1,14 @@
+# Vue, Docker, 開発環境構築
+
 # 必要
 
-* Docker
-* docker-compose
-* make
+- Docker
+- docker-compose
+- make
 
 # 使い方
+
+## Docker デーモン起動
 
 ## クローンしたフォルダの中に移動
 
@@ -12,7 +16,7 @@
 $ cd docker-nuxtjs
 ```
 
-## .git削除
+## .git 削除
 
 ```shell script
 $ rm -rf .git
@@ -21,9 +25,10 @@ $ rm -rf .git
 ## 以下のコマンド実行
 
 ```shell script
-make init
+$ make init
 ```
-成功すると下記表示↓
+
+成功すると下記表示 ↓
 
 ```shell script
 ...
@@ -56,15 +61,16 @@ docker-compose exec -d dev bash -c 'cd $PROJECT_NAME && npm run dev'
 $
 ```
 
-## Nuxt.jsサンプルページが起動しているはず
+## Nuxt.js サンプルページが起動しているはず
 
-* http://localhost
-- 本リポジトリ内の`app/`とdockerコンテナ内の`/work/app`が同期（ボリュームマウント）している．
+- http://localhost
 
+* 本リポジトリ内の`app/`と docker コンテナ内の`/work/app`が同期（ボリュームマウント）している．
 
 # 開発流れ
 
 ## make init 後
+
 ```shell script
 Makefileがあるディレクトリに移動
 
@@ -79,7 +85,8 @@ git checkout -b feature/{yourname}/{branchname}
 make run
 ```
 
-## 2回目
+## 2 回目
+
 ```shell script
 make up
 make in
@@ -99,63 +106,63 @@ git push origin feature/yourname/branchname
 make stop
 ```
 
-# Docker操作
+# Docker 操作
 
-## Nuxtアプリ作成
+## Nuxt アプリ作成
 
 ```shell script
 make init
 ```
 
-## Dockerコンテナ起動
+## Docker コンテナ起動
 
 ```shell script
 make up
 ```
 
-## Nuxtアプリ起動
+## Nuxt アプリ起動
 
 ```shell script
 make run
 ```
 
-## Dockerコンテナ停止
+## Docker コンテナ停止
 
 ```shell script
 make stop
 ```
 
-## Dockerコンテナに入る
+## Docker コンテナに入る
 
 ```shell script
 make in
 ```
 
-## Dockerコンテナ確認
+## Docker コンテナ確認
 
 ```shell script
 make ps
 ```
 
-## Dockerコンテナlog確認
+## Docker コンテナ log 確認
 
 ```shell script
 make logs
 ```
 
-## Dockerコンテナ削除
+## Docker コンテナ削除
 
 ```shell script
 make down
 ```
 
-## Dockerコンテナ再起動
+## Docker コンテナ再起動
 
 ```shell script
 make restart
 ```
 
-## Dockerコンテナをイメージから再ビルド
+## Docker コンテナをイメージから再ビルド
 
 ```shell script
 make remake
@@ -173,15 +180,16 @@ make destroy
 
 ## .env
 
-PROJECT_NAMEの値を希望に合わせて編集
-この値はnuxt.jsプロジェクトのディレクトリ名にもなる
+PROJECT_NAME の値を希望に合わせて編集
+この値は nuxt.js プロジェクトのディレクトリ名にもなる
 
 ```.dotenv
 PROJECT_NAME=my_project
 ```
+
 ## Makefile
 
-create-nuxt-app実行時のオプション --answers で予めカスタム内容を指定
+create-nuxt-app 実行時のオプション --answers で予めカスタム内容を指定
 
 ```makefile
 ...
@@ -189,7 +197,7 @@ create-nuxt-app実行時のオプション --answers で予めカスタム内容
 create-nuxt-app:
 	docker-compose exec dev bash -c 'create-nuxt-app $$PROJECT_NAME --answers "{ \
 	\"name\": \"$$PROJECT_NAME\", \
-	\"language\": \"ts\", \
+	\"language\": \"js\", \
 	\"pm\": \"yarn\", \
 	\"ui\": \"vuetify\", \
 	\"features\": [\"axios\"], \
@@ -203,5 +211,3 @@ create-nuxt-app:
 ...
 `Makefile` > `docker-compose` > `bash -c` と入れ子
 ```
-
-
