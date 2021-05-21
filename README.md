@@ -37,8 +37,8 @@ $ rm -rf .git
 ```shell script
 .env
 
-PROJECT_NAME=hoge-project
-CONTAINER_NAME=hoge-container
+PROJECT_NAME=nuxt-project
+CONTAINER_NAME=nuxt-container
 ```
 
 ## 5. Docker イメージ，コンテナ & Nuxt プロジェクト作成
