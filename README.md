@@ -87,6 +87,9 @@ $ git add .
 $ git commit -m "first commit"
 $ git remote {作成したリポジトリ名}
 $ git push -u origin master
+
+この後は,ブランチ切って機能ごとに開発
+開発後,masterにマージ
 ```
 
 ## プロジェクト完成! やったね!
