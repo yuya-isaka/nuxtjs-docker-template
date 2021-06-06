@@ -8,7 +8,7 @@
 
 # 使い方
 
-## 1. Docker デーモン起動
+## 1. git clone https://github.com/yuya-isaka/nuxtjs-docker-template.git
 
 ## 2. フォルダ名変更 (必須)
 
