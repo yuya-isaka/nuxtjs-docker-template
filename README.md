@@ -12,7 +12,7 @@
 
 ## 2. フォルダ名変更 (必須)
 
-* Dockerから認識される名前
+* このフォルダ名がDockerから認識される名前となる
 * nuxtjs-docker-template -> {template-name}
 
 ## 3. フォルダに移動
